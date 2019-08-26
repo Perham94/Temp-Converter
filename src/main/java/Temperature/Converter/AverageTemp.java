@@ -65,6 +65,8 @@ public class AverageTemp {
 
 	}
 
+	// Testing
+
 	public void Calculate() throws IOException {
 		getValues();
 		link = "https://api.mathjs.org/v4/?expr=" + path;
@@ -74,6 +76,7 @@ public class AverageTemp {
 			https.setRequestMethod("POST");
 			https.getResponseMessage();
 			https.getOutputStream();
+
 			System.out.println(https.getOutputStream());
 
 		} catch (ProtocolException e) {
