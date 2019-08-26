@@ -1,0 +1,23 @@
+{
+	"temperature": [{
+			"temperatureID": "0",
+			"temperaturevalue": "25.0",
+			"unit": "C"
+		},
+		{
+			"temperatureID": "1",
+			"temperaturevalue": "35.2",
+			"unit": "C"
+		},
+		{
+			"temperatureID": "2",
+			"temperaturevalue": "28.3",
+			"unit": "C"
+		},
+		{
+			"temperatureID": "3",
+			"temperaturevalue": "98.0",
+			"unit": "F"
+		}
+	]
+}
