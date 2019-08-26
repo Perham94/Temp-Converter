@@ -4,7 +4,7 @@ package Temperature.Converter;
  * Hello world!
  *
  */
-public class App {
+public class Meny {
 	public static void main(String[] args) {
 
 	}
