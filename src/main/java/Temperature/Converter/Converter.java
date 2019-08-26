@@ -20,11 +20,11 @@ public class Converter {
 
 	public static void main(String args[]) throws IOException {
 		ArrayList<Temperature> temp = new ArrayList<Temperature>();
-		temp.add(new Temperature("c", 22d));
-		temp.add(new Temperature("c", 21d));
-		temp.add(new Temperature("c", 42d));
+		temp.add(new Temperature("f", 22d));
+		temp.add(new Temperature("f", 21d));
+		temp.add(new Temperature("f", 42d));
 
-		ArrayList<Temperature> temp2 = convertCelsiusToFahrenheit(temp);
+		ArrayList<Temperature> temp2 = convertFahrenheitToCelsius(temp);
 
 		for (Temperature temperature : temp2) {
 			System.out.println(temperature.getTemp() + temperature.getTempUnit());
@@ -103,8 +103,11 @@ public class Converter {
 			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, temperature), soapEndpointUrl);
 			// Print the SOAP Response
 //			System.out.println("Response SOAP Message:");
+		//	soapResponse.writeTo(System.out);
 //			System.out.println(soapResponse.getSOAPBody().getFirstChild().getTextContent());
+			// Get the temperature and cast it to double
 			convertedTemp = Double.valueOf(soapResponse.getSOAPBody().getFirstChild().getTextContent());
+			
 		} catch (Exception e) {
 			System.err.println(
 					"\nError occurred while sending SOAP Request to Server!\nMake sure you have the correct endpoint URL and SOAPAction!\n");
