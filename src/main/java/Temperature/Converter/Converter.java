@@ -24,7 +24,7 @@ public class Converter {
 		temp.add(new Temperature("c", 21d));
 		temp.add(new Temperature("c", 42d));
 
-		ArrayList<Temperature> temp2 = convertFahrenheitToCelsius(temp);
+		ArrayList<Temperature> temp2 = convertCelsiusToFahrenheit(temp);
 
 		for (Temperature temperature : temp2) {
 			System.out.println(temperature.getTemp() + temperature.getTempUnit());
