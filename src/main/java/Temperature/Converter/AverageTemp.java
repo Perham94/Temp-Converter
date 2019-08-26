@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class AverageTemp {
 
 	private URL url;
+
 	private HttpsURLConnection https;
 	private ArrayList<Temperature> TempList;
 	private String path = "";
@@ -55,9 +57,13 @@ public class AverageTemp {
 
 	public void getValues() {
 
-		for (int i = 0; i <= TempList.size(); i++) {
+		for (int i = 0; i < TempList.size(); i++) {
 
-			path = TempList.get(i).getTemp() + "%2B";
+			if (i == TempList.size() - 1) {
+				path += "" + TempList.get(i).getTemp() + "";
+				break;
+			}
+			path += TempList.get(i).getTemp() + "%2B";
 
 		}
 
@@ -65,19 +71,22 @@ public class AverageTemp {
 
 	}
 
-	// Testing
-
 	public void Calculate() throws IOException {
 		getValues();
 		link = "https://api.mathjs.org/v4/?expr=" + path;
+		String result = "";
 		try {
 			url = new URL(link);
 			https = (HttpsURLConnection) url.openConnection();
-			https.setRequestMethod("POST");
-			https.getResponseMessage();
-			https.getOutputStream();
 
-			System.out.println(https.getOutputStream());
+			Scanner scanner = new Scanner(https.getInputStream());
+			while (scanner.hasNextLine()) {
+				result += scanner.nextLine();
+
+			}
+			result += TempList.get(0).getTempUnit();
+			scanner.close();
+			System.out.println(result);
 
 		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
