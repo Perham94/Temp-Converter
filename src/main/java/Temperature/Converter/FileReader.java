@@ -15,7 +15,7 @@ import java.io.*;
 
 public class FileReader {
 	
-	public static void main(String[] args) {
+	public static ArrayList<Temperature> temperatureList() {
 		
 		//System.out.println(readFrom());
 		JSONObject object1 = readFrom();
@@ -33,13 +33,13 @@ public class FileReader {
 			temperatureList.add(myObj);
 		}
 		
-		for (Temperature temperature : temperatureList) {
-			System.out.println(temperature.getTemp() + temperature.getTempUnit());
-		}
-		
-
-		}
+//		for (Temperature temperature : temperatureList) {
+//			System.out.println(temperature.getTemp() + temperature.getTempUnit());
+//		}
 	
+		
+		return temperatureList;
+	}
 	
 	static JSONObject readFrom() {
 		String file = "src\\main\\java\\TemperatureData";
