@@ -106,7 +106,7 @@ public class Converter {
 		//	soapResponse.writeTo(System.out);
 //			System.out.println(soapResponse.getSOAPBody().getFirstChild().getTextContent());
 			// Get the temperature and cast it to double
-			convertedTemp = Double.valueOf(soapResponse.getSOAPBody().getFirstChild().getTextContent());
+			convertedTemp = Double.valueOf(soapResponse.getSOAPBody().getTextContent());
 			
 		} catch (Exception e) {
 			System.err.println(
@@ -121,6 +121,7 @@ public class Converter {
 		SOAPMessage soapMessage = messageFactory.createMessage();
 
 		createSoapEnvelope(soapMessage, temperature);
+		
 		MimeHeaders headers = soapMessage.getMimeHeaders();
 		headers.addHeader("SOAPAction", soapAction);
 		soapMessage.saveChanges();

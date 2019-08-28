@@ -18,6 +18,6 @@ public class Meny {
 		AverageTemp test = new AverageTemp(temp);
 
 		test.Calculate();
-
+		
 	}
 }
