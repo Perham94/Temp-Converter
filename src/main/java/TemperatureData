@@ -18,6 +18,16 @@
 			"temperatureID": "3",
 			"temperaturevalue": "98.0",
 			"unit": "F"
+		},
+		{
+			"temperatureID": "4",
+			"temperaturevalue": "78.0",
+			"unit": "F"
+		},
+		{
+			"temperatureID": "5",
+			"temperaturevalue": "33.4",
+			"unit": "C"
 		}
 	]
 }

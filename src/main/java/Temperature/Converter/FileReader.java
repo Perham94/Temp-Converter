@@ -23,14 +23,12 @@ public class FileReader {
 		//System.out.println(object1.getJSONArray("temperature"));
 		
 		ArrayList<Temperature> temperatureList = new ArrayList<Temperature>();
+
 		
-		for(int i = 0; i < 4; i++) {
-			
+		for(int i = 0; i < object1.getJSONArray("temperature").length(); i++) {
+		
 			JSONObject object2 = object1.getJSONArray("temperature").getJSONObject(i);
-			//temperatureList.add(object2.get("temperaturevalue").toString() + " " + object2.get("unit").toString());
 			
-			
-		
 			Temperature myObj = new Temperature((String) object2.get("unit"),Double.valueOf(object2.get("temperaturevalue").toString()));
 			temperatureList.add(myObj);
 		}
