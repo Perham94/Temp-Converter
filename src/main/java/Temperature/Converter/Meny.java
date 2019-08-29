@@ -11,16 +11,16 @@ public class Meny {
 	private static final String ERROR_NO_DATA = "INGA MÄTVÄRDEN HITTADES!";
 			
     private static ArrayList<Temperature> tempSeries;
-	private static ArrayList<Temperature> tempSeriesAverage;
 	private static ArrayList<Temperature> tempSeriesCelsius;
 	private static ArrayList<Temperature> tempSeriesFahrenheit;
 	
     private static DecimalFormat numberFormat = new DecimalFormat("#.00"); // Antal decimaler	
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {
 
 		tempSeries = FileReader.temperatureList();
-		tempSeriesAverage = new ArrayList<>();
+		new ArrayList<>();
 		tempSeriesCelsius = new ArrayList<>();
 		tempSeriesFahrenheit = new ArrayList<>();		
 
@@ -39,8 +39,7 @@ public class Meny {
             System.out.print("\nAnge menyval: ");
             menyval = sc.nextInt();
             sc.nextLine();
-            int post = 0;            
-           
+
             switch(menyval) {
                 
 	            case 1:
@@ -70,6 +69,7 @@ public class Meny {
             		if (tempSeries != null && tempSeries.size() != 0) {
 	            		tempSeriesCelsius = Converter.convertFahrenheitToCelsius(tempSeries);
 	            		showSeries(tempSeriesCelsius);
+	        
             		}else {
 	        			System.out.println(ERROR_NO_DATA);
         		    }

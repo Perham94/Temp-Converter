@@ -1,6 +1,5 @@
 package Temperature.Converter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.xml.soap.MessageFactory;
@@ -15,29 +14,17 @@ import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 
 public class Converter {
-
+	//Webadress to API
 	private static String soapEndpointUrl = "https://www.w3schools.com/xml/tempconvert.asmx";
-
-	public static void main(String args[]) throws IOException {
-		ArrayList<Temperature> temp = new ArrayList<Temperature>();
-		temp.add(new Temperature("f", 22d));
-		temp.add(new Temperature("f", 21d));
-		temp.add(new Temperature("f", 42d));
-
-		ArrayList<Temperature> temp2 = convertFahrenheitToCelsius(temp);
-
-		for (Temperature temperature : temp2) {
-			System.out.println(temperature.getTemp() + temperature.getTempUnit());
-		}
-	}
 
 	public static ArrayList<Temperature> convertCelsiusToFahrenheit(ArrayList<Temperature> tpList) {
 		String soapAction = "https://www.w3schools.com/xml/CelsiusToFahrenheit";
 		ArrayList<Temperature> fahrenheitList = new ArrayList<Temperature>();
 		for (Temperature temperature : tpList) {
-			if (temperature.getTempUnit().contentEquals("c")) {
+			//Checks if the temperature is in celsius else add it to the list without sending it to the converter.
+			if (temperature.getTempUnit().contentEquals("C")) {
 				Double d = callSoapWebService(soapEndpointUrl, soapAction, temperature);
-				fahrenheitList.add(new Temperature("f", d));
+				fahrenheitList.add(new Temperature("F", d));
 			} else {
 				fahrenheitList.add(temperature);
 			}
@@ -50,9 +37,9 @@ public class Converter {
 		String soapAction = "https://www.w3schools.com/xml/FahrenheitToCelsius";
 		ArrayList<Temperature> celsiusList = new ArrayList<Temperature>();
 		for (Temperature temperature : tpList) {
-			if (temperature.getTempUnit().contentEquals("f")) {
+			if (temperature.getTempUnit().contentEquals("F")) {
 				Double d = callSoapWebService(soapEndpointUrl, soapAction, temperature);
-				celsiusList.add(new Temperature("c", d));
+				celsiusList.add(new Temperature("C", d));
 			} else {
 				celsiusList.add(temperature);
 			}
@@ -60,28 +47,17 @@ public class Converter {
 		return celsiusList;
 	}
 
-	private static void createSoapEnvelope(SOAPMessage soapMessage, Temperature temperature) throws SOAPException {
+	private static void createSoapMessage(SOAPMessage soapMessage, Temperature temperature) throws SOAPException {
 		SOAPPart soapPart = soapMessage.getSOAPPart();
-
 		String myNamespace = "temperature";
 		String myNamespaceURI = "https://www.w3schools.com/xml/";
-
+		//Create the XML soapmessage by building it upp element by element.
 		SOAPEnvelope envelope = soapPart.getEnvelope();
 		envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
-		/*
-		 * Constructed SOAP Request Message: <SOAP-ENV:Envelope
-		 * xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-		 * xmlns:myNamespace="https://www.w3schools.com/xml/"> <SOAP-ENV:Header/>
-		 * <SOAP-ENV:Body> <myNamespace:CelsiusToFahrenheit>
-		 * <myNamespace:Celsius>100</myNamespace:Celsius>
-		 * </myNamespace:CelsiusToFahrenheit> </SOAP-ENV:Body> </SOAP-ENV:Envelope>
-		 */
-
-		// SOAP Body
 		SOAPBody soapBody = envelope.getBody();
 		SOAPElement soapBodyElem;
 		SOAPElement soapBodyElem1;
-		if (temperature.getTempUnit().contentEquals("c")) {
+		if (temperature.getTempUnit().contentEquals("C")) {
 			soapBodyElem = soapBody.addChildElement("CelsiusToFahrenheit", myNamespace);
 			soapBodyElem1 = soapBodyElem.addChildElement("Celsius", myNamespace);
 
@@ -102,10 +78,10 @@ public class Converter {
 			// Send SOAP Message to SOAP Server
 			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(soapAction, temperature), soapEndpointUrl);
 			// Print the SOAP Response
-//			System.out.println("Response SOAP Message:");
-		//	soapResponse.writeTo(System.out);
-//			System.out.println(soapResponse.getSOAPBody().getFirstChild().getTextContent());
-			// Get the temperature and cast it to double
+			// System.out.println("Response SOAP Message:");
+		    // soapResponse.writeTo(System.out);
+
+			// Get the temperature from the response and cast it to double
 			convertedTemp = Double.valueOf(soapResponse.getSOAPBody().getTextContent());
 			
 		} catch (Exception e) {
@@ -120,7 +96,7 @@ public class Converter {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
 
-		createSoapEnvelope(soapMessage, temperature);
+		createSoapMessage(soapMessage, temperature);
 		
 		MimeHeaders headers = soapMessage.getMimeHeaders();
 		headers.addHeader("SOAPAction", soapAction);
