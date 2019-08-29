@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Hello world!
  *
  */
+
 public class Meny {
 	public static void main(String[] args) throws IOException {
 
