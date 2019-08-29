@@ -47,28 +47,6 @@ public class Converter {
 		return celsiusList;
 	}
 
-	private static void createSoapMessage(SOAPMessage soapMessage, Temperature temperature) throws SOAPException {
-		SOAPPart soapPart = soapMessage.getSOAPPart();
-		String myNamespace = "temperature";
-		String myNamespaceURI = "https://www.w3schools.com/xml/";
-		//Create the XML soapmessage by building it upp element by element.
-		SOAPEnvelope envelope = soapPart.getEnvelope();
-		envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
-		SOAPBody soapBody = envelope.getBody();
-		SOAPElement soapBodyElem;
-		SOAPElement soapBodyElem1;
-		if (temperature.getTempUnit().contentEquals("C")) {
-			soapBodyElem = soapBody.addChildElement("CelsiusToFahrenheit", myNamespace);
-			soapBodyElem1 = soapBodyElem.addChildElement("Celsius", myNamespace);
-
-		} else {
-			soapBodyElem = soapBody.addChildElement("FahrenheitToCelsius", myNamespace);
-			soapBodyElem1 = soapBodyElem.addChildElement("Fahrenheit", myNamespace);
-
-		}
-		soapBodyElem1.addTextNode(String.valueOf(temperature.getTemp()));
-	}
-
 	private static Double callSoapWebService(String soapEndpointUrl, String soapAction, Temperature temperature) {
 		Double convertedTemp = 0d;
 		try {
@@ -103,6 +81,28 @@ public class Converter {
 		soapMessage.saveChanges();
 
 		return soapMessage;
+	}
+
+	private static void createSoapMessage(SOAPMessage soapMessage, Temperature temperature) throws SOAPException {
+		SOAPPart soapPart = soapMessage.getSOAPPart();
+		String myNamespace = "temperature";
+		String myNamespaceURI = "https://www.w3schools.com/xml/";
+		//Create the XML soapmessage by building it upp element by element.
+		SOAPEnvelope envelope = soapPart.getEnvelope();
+		envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
+		SOAPBody soapBody = envelope.getBody();
+		SOAPElement soapBodyElem;
+		SOAPElement soapBodyElem1;
+		if (temperature.getTempUnit().contentEquals("C")) {
+			soapBodyElem = soapBody.addChildElement("CelsiusToFahrenheit", myNamespace);
+			soapBodyElem1 = soapBodyElem.addChildElement("Celsius", myNamespace);
+
+		} else {
+			soapBodyElem = soapBody.addChildElement("FahrenheitToCelsius", myNamespace);
+			soapBodyElem1 = soapBodyElem.addChildElement("Fahrenheit", myNamespace);
+
+		}
+		soapBodyElem1.addTextNode(String.valueOf(temperature.getTemp()));
 	}
 
 }
