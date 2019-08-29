@@ -3,10 +3,13 @@ package Temperature.Converter;
 import java.io.IOException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import org.junit.jupiter.api.Test;
 
 public class AverageTemp {
 
@@ -71,20 +74,28 @@ public class AverageTemp {
 
 	}
 
+	@Test
 	public void Calculate() throws IOException {
 		getValues();
 		link = "https://api.mathjs.org/v4/?expr=" + path;
 		String result = "";
 		try {
-			url = new URL(link);
-			https = (HttpsURLConnection) url.openConnection();
 
-			Scanner scanner = new Scanner(https.getInputStream());
-			while (scanner.hasNextLine()) {
-				result += scanner.nextLine();
+			// https = (HttpsURLConnection) url.openConnection();
 
-			}
-			result += TempList.get(0).getTempUnit();
+			Scanner scanner = new Scanner(new URL(link).openStream(), StandardCharsets.UTF_8.toString());
+
+			scanner.useDelimiter("\\A");
+			result = scanner.hasNext() ? scanner.next() : "";
+
+			/*
+			 * while (scanner.hasNextLine()) { result += scanner.nextLine();
+			 * 
+			 * }
+			 * 
+			 * scanner.close();
+			 * 
+			 */
 			scanner.close();
 			System.out.println(result);
 

@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Meny {
 	
 	private static final String ERROR_NO_DATA = "INGA MÄTVÄRDEN HITTADES!";
