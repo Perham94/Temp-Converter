@@ -37,12 +37,13 @@ public class Meny {
 		do {
 			System.out.println("\n\n### MENY ###################################");
 			System.out.println("1 = LÄS MÄTVÄRDEN FRÅN FIL");
-			System.out.println("2 = VISA MÄTVÄRDEN FRÅN FIL");
-			System.out.println("3 = VISA MÄTVÄRDEN I CELSIUS");
-			System.out.println("4 = VISA MÄTVÄRDEN I FAHRENHEIT");
-			System.out.println("5 = BERÄKNA MEDELVÄRDE OCH VISA I CELSIUS");
-			System.out.println("6 = BERÄKNA MEDELVÄRDE OCH VISA I FAHRENHEIT");
-			System.out.println("7 = AVSLUTA");
+			System.out.println("2 = LÄS MÄTVÄRDEN FRÅN Internet");
+			System.out.println("3 = VISA MÄTVÄRDEN");
+			System.out.println("4 = VISA MÄTVÄRDEN I CELSIUS");
+			System.out.println("5 = VISA MÄTVÄRDEN I FAHRENHEIT");
+			System.out.println("6 = BERÄKNA MEDELVÄRDE OCH VISA I CELSIUS");
+			System.out.println("7 = BERÄKNA MEDELVÄRDE OCH VISA I FAHRENHEIT");
+			System.out.println("8 = AVSLUTA");
 			System.out.print("\nAnge menyval:");
 			menyval = sc.nextInt();
 			sc.nextLine();
@@ -58,9 +59,18 @@ public class Meny {
 					System.out.println("\n" + tempSeries.size() + " MÄTVÄRDEN HAR LÄSTS IN.");
 				}
 				break;
-
 			case 2:
 				System.out.println("### inside case 2");
+				tempSeries = RemoteSource.getRemoteTemperatures();
+				if (tempSeries.size() == 0) {
+					System.err.println(ERROR_NO_DATA);
+				} else {
+					System.out.println("\n" + tempSeries.size() + " MÄTVÄRDEN HAR LÄSTS IN.");
+				}
+				break;
+
+			case 3:
+				System.out.println("### inside case 3");
 
 				if (tempSeries != null && tempSeries.size() != 0) {
 					System.out.println("\n### MÄTVÄRDEN ###");
@@ -70,8 +80,8 @@ public class Meny {
 				}
 				break;
 
-			case 3:
-				System.out.println("### inside case 3");
+			case 4:
+				System.out.println("### inside case 4");
 
 				if (tempSeries != null && tempSeries.size() != 0) {
 					tempSeriesCelsius = Converter.convertFahrenheitToCelsius(tempSeries);
@@ -82,7 +92,7 @@ public class Meny {
 				}
 				break;
 
-			case 4:
+			case 5:
 				if (tempSeries != null && tempSeries.size() != 0) {
 					tempSeriesFahrenheit = Converter.convertCelsiusToFahrenheit(tempSeries);
 					showSeries(tempSeriesFahrenheit);
@@ -91,7 +101,7 @@ public class Meny {
 				}
 				break;
 
-			case 5:
+			case 6:
 				if (tempSeries != null && tempSeries.size() != 0) {
 					AverageTemp averageTempObj = new AverageTemp(Converter.convertFahrenheitToCelsius(tempSeries));
 					System.out.println("\nMedeltemperatur i Celsius:");
@@ -101,7 +111,7 @@ public class Meny {
 				}
 				break;
 
-			case 6:
+			case 7:
 				if (tempSeries != null && tempSeries.size() != 0) {
 					AverageTemp averageTempObj = new AverageTemp(Converter.convertCelsiusToFahrenheit(tempSeries));
 					System.out.println("\nMedeltemperatur i Fahrenheit:");
@@ -111,7 +121,7 @@ public class Meny {
 				}
 				break;
 
-			case 7:
+			case 8:
 				System.exit(0);
 			}
 		} while (menyval != 7);
