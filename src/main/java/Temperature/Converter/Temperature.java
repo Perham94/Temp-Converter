@@ -1,5 +1,9 @@
 package Temperature.Converter;
 
+/**
+ * @author Chjun-chi
+ *
+ */
 public class Temperature {
 	private String tempUnit;
 	private double temp;
@@ -14,18 +18,30 @@ public class Temperature {
 		this.temp = temp;
 	}
 
+	/**
+	 * @return String
+	 */
 	public String getTempUnit() {
 		return tempUnit;
 	}
 
+	/**
+	 * @param tempUnit
+	 */
 	public void setTempUnit(String tempUnit) {
 		this.tempUnit = tempUnit;
 	}
 
+	/**
+	 * @return double
+	 */
 	public double getTemp() {
 		return temp;
 	}
 
+	/**
+	 * @param temp
+	 */
 	public void setTemp(double temp) {
 		this.temp = temp;
 	}
