@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 public class AverageTemp {
 
-	private URL url;
 	private ArrayList<Temperature> TempList;
 	private String path = "";
 	private String link;
@@ -27,37 +26,9 @@ public class AverageTemp {
 	}
 
 	/**
-	 * @return the url
-	 */
-	public URL getUrl() {
-		return url;
-	}
-
-	/**
-	 * @param url the url to set
-	 */
-	public void setUrl(URL url) {
-		this.url = url;
-	}
-
-	/**
-	 * @return the path
-	 */
-	public String getPath() {
-		return path;
-	}
-
-	/**
-	 * @param path the path to set
-	 */
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	/**
 	 * Creates the String that is going to be sent to the Math API to be calculated.
 	 */
-	public void getValues() {
+	private void getValues() {
 		for (int i = 0; i < TempList.size(); i++) {
 			if (i == TempList.size() - 1) {
 				path += "" + TempList.get(i).getTemp() + "";
@@ -83,7 +54,7 @@ public class AverageTemp {
 			scanner.useDelimiter("\\A");
 			result = scanner.hasNext() ? scanner.next() : "";
 			scanner.close();
-			System.out.println(result);
+			System.out.println(Math.round(Float.parseFloat(result)) + TempList.get(0).getTempUnit());
 		} catch (ProtocolException e) {
 			e.printStackTrace();
 		}

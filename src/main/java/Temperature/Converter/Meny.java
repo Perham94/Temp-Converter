@@ -124,7 +124,7 @@ public class Meny {
 			case 8:
 				System.exit(0);
 			}
-		} while (menyval != 7);
+		} while (menyval != 8);
 
 		sc.close();
 
