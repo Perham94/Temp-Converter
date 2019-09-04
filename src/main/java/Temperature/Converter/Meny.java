@@ -44,14 +44,14 @@ public class Meny {
 			System.out.println("6 = BERÄKNA MEDELVÄRDE OCH VISA I CELSIUS");
 			System.out.println("7 = BERÄKNA MEDELVÄRDE OCH VISA I FAHRENHEIT");
 			System.out.println("8 = AVSLUTA");
-			System.out.print("\nAnge menyval:");
+			System.out.print("\nAnge menyval: ");
 			menyval = sc.nextInt();
 			sc.nextLine();
 			System.out.println();
 			switch (menyval) {
 
 			case 1:
-				System.out.println("### inside case 1");
+				// System.out.println("### inside case 1");
 				tempSeries = FileReader.temperatureList();
 				if (tempSeries.size() == 0) {
 					System.err.println(ERROR_NO_DATA);
@@ -60,7 +60,7 @@ public class Meny {
 				}
 				break;
 			case 2:
-				System.out.println("### inside case 2");
+				// System.out.println("### inside case 2");
 				tempSeries = RemoteSource.getRemoteTemperatures();
 				if (tempSeries.size() == 0) {
 					System.err.println(ERROR_NO_DATA);
@@ -70,7 +70,7 @@ public class Meny {
 				break;
 
 			case 3:
-				System.out.println("### inside case 3");
+				// System.out.println("### inside case 3");
 
 				if (tempSeries != null && tempSeries.size() != 0) {
 					System.out.println("\n### MÄTVÄRDEN ###");
@@ -81,7 +81,7 @@ public class Meny {
 				break;
 
 			case 4:
-				System.out.println("### inside case 4");
+				// System.out.println("### inside case 4");
 
 				if (tempSeries != null && tempSeries.size() != 0) {
 					tempSeriesCelsius = Converter.convertFahrenheitToCelsius(tempSeries);
@@ -105,7 +105,7 @@ public class Meny {
 				if (tempSeries != null && tempSeries.size() != 0) {
 					AverageTemp averageTempObj = new AverageTemp(Converter.convertFahrenheitToCelsius(tempSeries));
 					System.out.println("\nMedeltemperatur i Celsius:");
-					averageTempObj.Calculate();
+					System.out.println(averageTempObj.Calculate());
 				} else {
 					System.err.println(ERROR_NO_DATA);
 				}
@@ -115,7 +115,7 @@ public class Meny {
 				if (tempSeries != null && tempSeries.size() != 0) {
 					AverageTemp averageTempObj = new AverageTemp(Converter.convertCelsiusToFahrenheit(tempSeries));
 					System.out.println("\nMedeltemperatur i Fahrenheit:");
-					averageTempObj.Calculate();
+					System.out.println(averageTempObj.Calculate());
 				} else {
 					System.err.println(ERROR_NO_DATA);
 				}
