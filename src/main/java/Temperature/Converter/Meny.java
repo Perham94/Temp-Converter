@@ -122,6 +122,7 @@ public class Meny {
 				break;
 
 			case 8:
+
 				System.exit(0);
 			}
 		} while (menyval != 8);
