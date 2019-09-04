@@ -63,13 +63,10 @@ public class RemoteSource {
 				sb.append(input); // Builds a string from the inputstream
 			}
 			br.close();
-//			Parse the string to a jsonobject
+			// Parse the string to a jsonobject
 			JSONObject js = new JSONObject(sb.toString());
-//			System.out.println(js.names());
-			js = js.getJSONObject("currently");
 
-//			System.out.println(js.names());
-//			System.out.println(js.get("temperature"));
+			js = js.getJSONObject("currently");
 
 			return new Temperature(unit, js.getDouble("temperature"));
 
