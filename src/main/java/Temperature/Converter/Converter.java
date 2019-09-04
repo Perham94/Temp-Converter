@@ -81,8 +81,8 @@ public class Converter {
 			// Print the SOAP Response
 			// System.out.println("Response SOAP Message:");
 			// soapResponse.writeTo(System.out);
-
 			// Get the temperature from the response and cast it to double
+			
 			convertedTemp = Double.valueOf(soapResponse.getSOAPBody().getTextContent());
 
 		} catch (Exception e) {
