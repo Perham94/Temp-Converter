@@ -24,7 +24,8 @@ public class Meny {
 	 * @throws IOException
 	 */
 
-	public static void main(String[] args) throws IOException {
+	//public static void main(String[] args) throws IOException {
+	public static void theMain() throws IOException {
 
 		tempSeries = null;
 		new ArrayList<>();
