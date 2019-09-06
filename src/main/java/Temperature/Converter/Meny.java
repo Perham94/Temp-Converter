@@ -62,6 +62,9 @@ public class Meny {
 				break;
 			case 2:
 				tempSeries = RemoteSource.getRemoteTemperatures();
+				
+				tempSeries.forEach(temp -> System.out.println(temp));
+				
 				if (tempSeries.size() == 0) {
 					System.err.println(ERROR_NO_DATA);
 				} else {

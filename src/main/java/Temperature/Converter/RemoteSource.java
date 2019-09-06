@@ -59,16 +59,24 @@ public class RemoteSource {
 			String input;
 			StringBuilder sb = new StringBuilder();
 			while ((input = br.readLine()) != null) {
-				System.out.println(input); //Write out line directly from inputstream.
+				System.out.println(input); // Write out line directly from inputstream.
 				sb.append(input); // Builds a string from the inputstream
 			}
 			br.close();
 			// Parse the string to a jsonobject
 			JSONObject js = new JSONObject(sb.toString());
+			Temperature temp = new Temperature();
+			temp.setLocation(js.getString("timezone"));
+			JSONObject jsCurrently = js.getJSONObject("currently");
+			temp.setTempUnit(unit);
+			temp.setTemp(jsCurrently.getDouble("temperature"));
+			temp.setSummary(jsCurrently.get("summary").toString());
+			temp.setTime(jsCurrently.get("time").toString());
 
-			js = js.getJSONObject("currently");
+			temp.setWindspeed(jsCurrently.get("windSpeed").toString() + "m/s");
 
-			return new Temperature(unit, js.getDouble("temperature"));
+			temp.setIcon(jsCurrently.get("icon").toString());
+			return temp;
 
 		} catch (MalformedURLException e) {// Catch errors
 			e.printStackTrace();
