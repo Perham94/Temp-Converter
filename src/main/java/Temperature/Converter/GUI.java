@@ -1,9 +1,9 @@
 
 package Temperature.Converter;
 
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 public class GUI extends Application {
 	
 	private static final String ERROR_NO_DATA = "INGA MÄTVÄRDEN HITTADES!";
@@ -25,9 +26,11 @@ public class GUI extends Application {
 	private static ArrayList<Temperature> tempSeriesFahrenheit;
 	private static DecimalFormat numberFormat = new DecimalFormat("#.00"); // Antal decimaler
 	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -77,6 +80,7 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
+        
         // LÄS MÄTVÄRDEN FRÅN FIL
         choice1Item.setOnAction(e -> {        	
         	System.out.println("Läser in mätvärden");
@@ -88,9 +92,13 @@ public class GUI extends Application {
 			}
         });
         
+        
         choice8Item.setOnAction(e -> {        	
             primaryStage.close();        	
         });
 	}
+	
 }
+
+
 
