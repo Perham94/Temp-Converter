@@ -51,7 +51,6 @@ public class Meny {
 			switch (menyval) {
 
 			case 1:
-				// System.out.println("### inside case 1");
 				tempSeries = FileReader.temperatureList();
 				if (tempSeries.size() == 0) {
 					System.err.println(ERROR_NO_DATA);
@@ -60,7 +59,6 @@ public class Meny {
 				}
 				break;
 			case 2:
-				// System.out.println("### inside case 2");
 				tempSeries = RemoteSource.getRemoteTemperatures();
 				if (tempSeries.size() == 0) {
 					System.err.println(ERROR_NO_DATA);
@@ -70,8 +68,6 @@ public class Meny {
 				break;
 
 			case 3:
-				// System.out.println("### inside case 3");
-
 				if (tempSeries != null && tempSeries.size() != 0) {
 					System.out.println("\n### MÄTVÄRDEN ###");
 					showSeries(tempSeries);
@@ -81,8 +77,6 @@ public class Meny {
 				break;
 
 			case 4:
-				// System.out.println("### inside case 4");
-
 				if (tempSeries != null && tempSeries.size() != 0) {
 					tempSeriesCelsius = Converter.convertFahrenheitToCelsius(tempSeries);
 					showSeries(tempSeriesCelsius);
