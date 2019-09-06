@@ -3,6 +3,7 @@ package Temperature.Converter;
 import java.io.IOException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +16,9 @@ public class AverageTemp {
 
 	private ArrayList<Temperature> TempList;
 	private String path = "";
-	private String link;
+	private URL link;
+	private String result = "";
+	private String loop = "";
 
 	/**
 	 * @param constructor
@@ -45,19 +48,25 @@ public class AverageTemp {
 	 * 
 	 * @throws IOException
 	 */
-	public void Calculate() throws IOException {
+	public String Calculate() throws IOException {
 		getValues();
-		link = "https://api.mathjs.org/v4/?expr=" + path;
-		String result = "";
+		link = new URL("https://api.mathjs.org/v4/?expr=" + path);
+
 		try {
-			Scanner scanner = new Scanner(new URL(link).openStream(), StandardCharsets.UTF_8.toString());
+			Scanner scanner = new Scanner(link.openStream(), StandardCharsets.UTF_8.toString());
+
 			scanner.useDelimiter("\\A");
-			result = scanner.hasNext() ? scanner.next() : "";
+			loop = scanner.hasNext() ? scanner.next() : "";
 			scanner.close();
-			System.out.println(Math.round(Float.parseFloat(result)) + TempList.get(0).getTempUnit());
+			result = Math.round(Float.parseFloat(loop)) + TempList.get(0).getTempUnit() + "";
+
 		} catch (ProtocolException e) {
 			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			System.out.println(e.toString());
 		}
+
+		return result;
 
 	}
 

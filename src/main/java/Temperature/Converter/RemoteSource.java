@@ -32,7 +32,7 @@ public class RemoteSource {
 		String adress1 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/40.795943,-73.959821,"
 				+ time.intValue() + "?units=us&exclude=[minutely,hourly,daily]";
 		array.add(connectToAdress(adress1, "F"));
-
+		// Stockholm
 		String adress2 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/59.332848, 18.011651,"
 				+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]";
 		array.add(connectToAdress(adress2, "C"));
@@ -59,16 +59,24 @@ public class RemoteSource {
 			String input;
 			StringBuilder sb = new StringBuilder();
 			while ((input = br.readLine()) != null) {
-				System.out.println(input); //Write out line directly from inputstream.
+				System.out.println(input); // Write out line directly from inputstream.
 				sb.append(input); // Builds a string from the inputstream
 			}
 			br.close();
 			// Parse the string to a jsonobject
 			JSONObject js = new JSONObject(sb.toString());
+			Temperature temp = new Temperature();
+			temp.setLocation(js.getString("timezone"));
+			JSONObject jsCurrently = js.getJSONObject("currently");
+			temp.setTempUnit(unit);
+			temp.setTemp(jsCurrently.getDouble("temperature"));
+			temp.setSummary(jsCurrently.get("summary").toString());
+			temp.setTime(jsCurrently.get("time").toString());
 
-			js = js.getJSONObject("currently");
+			temp.setWindspeed(jsCurrently.get("windSpeed").toString() + "m/s");
 
-			return new Temperature(unit, js.getDouble("temperature"));
+			temp.setIcon(jsCurrently.get("icon").toString());
+			return temp;
 
 		} catch (MalformedURLException e) {// Catch errors
 			e.printStackTrace();
