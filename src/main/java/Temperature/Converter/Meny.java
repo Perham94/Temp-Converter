@@ -43,7 +43,9 @@ public class Meny {
 			System.out.println("5 = VISA MÄTVÄRDEN I FAHRENHEIT");
 			System.out.println("6 = BERÄKNA MEDELVÄRDE OCH VISA I CELSIUS");
 			System.out.println("7 = BERÄKNA MEDELVÄRDE OCH VISA I FAHRENHEIT");
-			System.out.println("8 = AVSLUTA");
+			System.out.println("8 = BERÄKNA MEDIANVÄRDE OCH VISA I FAHRENHEIT");
+			System.out.println("9 = BERÄKNA MEDIANVÄRDE OCH VISA I CELSIUS");
+			System.out.println("10 = AVSLUTA");
 			System.out.print("\nAnge menyval: ");
 			menyval = sc.nextInt();
 			sc.nextLine();
@@ -116,9 +118,29 @@ public class Meny {
 				break;
 
 			case 8:
+				if (tempSeries != null && tempSeries.size() != 0) {
+					MedianTemp averageTempObj = new MedianTemp(Converter.convertCelsiusToFahrenheit(tempSeries));
+					System.out.println("\nMediantemperatur i Fahrenheit:");
+					System.out.println(averageTempObj.Calculate());
+				} else {
+					System.err.println(ERROR_NO_DATA);
+				}
+				break;
+			case 9:
+				if (tempSeries != null && tempSeries.size() != 0) {
+					MedianTemp averageTempObj = new MedianTemp(Converter.convertFahrenheitToCelsius(tempSeries));
+					System.out.println("\nMedeltemperatur i Celsius:");
+					System.out.println(averageTempObj.Calculate());
+				} else {
+					System.err.println(ERROR_NO_DATA);
+				}
+				break;
+
+			case 10:
+
 				System.exit(0);
 			}
-		} while (menyval != 8);
+		} while (menyval != 10);
 
 		sc.close();
 
