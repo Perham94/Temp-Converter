@@ -70,6 +70,7 @@ public class RemoteSource {
 			JSONObject jsCurrently = js.getJSONObject("currently");
 			temp.setTempUnit(unit);
 			temp.setTemp(jsCurrently.getDouble("temperature"));
+			temp.setApparentTemperature(jsCurrently.get("apparentTemperature").toString());
 			temp.setSummary(jsCurrently.get("summary").toString());
 			temp.setTime(jsCurrently.get("time").toString());
 

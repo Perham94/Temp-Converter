@@ -155,7 +155,7 @@ public class Meny {
 	 * @param series
 	 */
 	private static void showSeries(ArrayList<Temperature> series) {
-		for (Temperature obj : series) {
+		for (TemperatureInterface obj : series) {
 			String temperature = (numberFormat.format(obj.getTemp()));
 			System.out.println(temperature + " °" + obj.getTempUnit().toUpperCase());
 		}
