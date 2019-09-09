@@ -3,14 +3,9 @@ package Temperature.Converter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
@@ -28,18 +23,19 @@ public class TemperatureView {
 
 	}
 
+
 	public Parent getTempView() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("TemperatureView.fxml"));
 		Text time = (Text) root.lookup("#time");
 
 //		Date date = new Date(Long.parseLong(temp.getTime()) * 1000);
 
-		LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(temp.getTime()) * 1000, 0,  ZoneOffset.UTC);
+		LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(temp.getTime()), 0,  ZoneOffset.UTC);
 		DateTimeFormatter formatter = DateTimeFormatter
 				.ofPattern("uuuu-MM-dd HH:mm:ss");
 		
 	
-		time.setText(dateTime.now().format(formatter));
+		time.setText(dateTime.format(formatter));
 		Text temperature = (Text) root.lookup("#temperature");
 		temperature.setText(String.valueOf(temp.getTemp() + " " + temp.getTempUnit()));
 
