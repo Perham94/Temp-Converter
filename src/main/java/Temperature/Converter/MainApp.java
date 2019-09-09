@@ -21,6 +21,7 @@ public class MainApp extends Application {
 		launch(args);
 	}
 
+
 	@Override
 	public void start(Stage primaryStage) {
 		Parent root;
@@ -33,7 +34,7 @@ public class MainApp extends Application {
 			ArrayList<Temperature> arrayTemps = new ArrayList<Temperature>();
 			arrayTemps = RemoteSource.getRemoteTemperatures();
 
-			Temperature temp = arrayTemps.get(0);
+			Temperature temp = arrayTemps.get(1);
 			TemperatureView tpv = new TemperatureView(temp);
 			Parent root2 = tpv.getTempView();
 
