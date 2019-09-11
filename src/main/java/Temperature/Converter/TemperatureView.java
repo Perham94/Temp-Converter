@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
@@ -23,18 +24,16 @@ public class TemperatureView {
 
 	}
 
-
 	public Parent getTempView() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("TemperatureView.fxml"));
 		Text time = (Text) root.lookup("#time");
 
 //		Date date = new Date(Long.parseLong(temp.getTime()) * 1000);
 
-		LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(temp.getTime()), 0,  ZoneOffset.UTC);
-		DateTimeFormatter formatter = DateTimeFormatter
-				.ofPattern("uuuu-MM-dd HH:mm:ss");
-		
-	
+		LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(temp.getTime()), 0, ZoneOffset.ofHours(2));
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+
 		time.setText(dateTime.format(formatter));
 		Text temperature = (Text) root.lookup("#temperature");
 		temperature.setText(String.valueOf(temp.getTemp() + " " + temp.getTempUnit()));
@@ -53,6 +52,7 @@ public class TemperatureView {
 		File file = new File(url.getPath());
 
 		icon.getEngine().loadContent("<img src=\"" + file.toURI() + "\">");
+		icon.getEngine().setUserStyleSheetLocation(getClass().getResource("/resource/CSS/WebView.css").toString());
 		icon.getEngine().getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
 			if (newState == Worker.State.SUCCEEDED) {
 				int width = (Integer) icon.getEngine().executeScript("document.body.scrollWidth");
