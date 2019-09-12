@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
@@ -48,6 +47,21 @@ public class TemperatureView {
 		summary.setText(temp.getSummary());
 
 		WebView icon = (WebView) root.lookup("#icon");
+		
+		
+		/*ICONS
+		"clear-day",
+				"clear-night",
+				"partly-cloudy-day",
+				"partly-cloudy-night",
+				"cloudy",
+				"rain",
+				"sleet",
+				"snow",
+				"wind",
+				"fog"
+		*/
+		
 		URL url = getClass().getResource("/resource/climacons-master/SVG/Cloud.svg");
 		File file = new File(url.getPath());
 
