@@ -5,7 +5,7 @@ package Temperature.Converter;
  *
  */
 public class Temperature {
-	private String tempUnit, icon, time, location, summary, windspeed,apparentTemperature;
+	private String tempUnit, icon, time, location, summary, windspeed, apparentTemperature;
 	public String getApparentTemperature() {
 		return apparentTemperature;
 	}
