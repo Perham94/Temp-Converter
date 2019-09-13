@@ -27,8 +27,6 @@ public class TemperatureView {
 		Parent root = FXMLLoader.load(getClass().getResource("TemperatureView.fxml"));
 		Text time = (Text) root.lookup("#time");
 
-//		Date date = new Date(Long.parseLong(temp.getTime()) * 1000);
-
 		LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(temp.getTime()), 0, ZoneOffset.ofHours(2));
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
@@ -47,22 +45,44 @@ public class TemperatureView {
 		summary.setText(temp.getSummary());
 
 		WebView icon = (WebView) root.lookup("#icon");
-		
-		
-		/*ICONS
-		"clear-day",
-				"clear-night",
-				"partly-cloudy-day",
-				"partly-cloudy-night",
-				"cloudy",
-				"rain",
-				"sleet",
-				"snow",
-				"wind",
-				"fog"
-		*/
-		
-		URL url = getClass().getResource("/resource/climacons-master/SVG/Cloud.svg");
+
+		URL url;
+		switch (temp.getIcon()) {
+		case "clear-day":
+			url = getClass().getResource("/resource/climacons-master/SVG/Sun.svg");
+			break;
+		case "clear-night":
+			url = getClass().getResource("/resource/climacons-master/SVG/Moon.svg");
+			break;
+		case "partly-cloudy-day":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud-Sun.svg");
+			break;
+		case "partly-cloudy-night":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud-Moon.svg");
+			break;
+		case "cloudy":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud.svg");
+			break;
+		case "rain":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud-Rain.svg");
+			break;
+		case "sleet":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud-Rain-Alt.svg");
+			break;
+		case "snow":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud-Snow.svg");
+			break;
+		case "wind":
+			url = getClass().getResource("/resource/climacons-master/SVG/Wind.svg");
+			break;
+		case "fog":
+			url = getClass().getResource("/resource/climacons-master/SVG/Cloud-Fog.svg");
+			break;
+		default:
+			url = getClass().getResource("/resource/climacons-master/SVG/Compass.svg");
+			break;
+		}
+
 		File file = new File(url.getPath());
 
 		icon.getEngine().loadContent("<img src=\"" + file.toURI() + "\">");
