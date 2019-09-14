@@ -33,16 +33,16 @@ public class TemperatureView {
 
 		time.setText(dateTime.format(formatter));
 		Text temperature = (Text) root.lookup("#temperature");
-		temperature.setText(String.valueOf(temp.getTemp() + " " + temp.getTempUnit()));
+		temperature.setText("Temperatur: " + String.valueOf(temp.getTemp() + " " + temp.getTempUnit()));
 
 		Text feelsLike = (Text) root.lookup("#feelslike");
-		feelsLike.setText(temp.getApparentTemperature() + " " + temp.getTempUnit());
+		feelsLike.setText("Känns som: " + temp.getApparentTemperature() + " " + temp.getTempUnit());
 
 		Text windSpeed = (Text) root.lookup("#windspeed");
-		windSpeed.setText(temp.getWindspeed());
+		windSpeed.setText("Vindhastighet: " + temp.getWindspeed());
 
 		Text summary = (Text) root.lookup("#summary");
-		summary.setText(temp.getSummary());
+		summary.setText("Väder: " + temp.getSummary());
 
 		WebView icon = (WebView) root.lookup("#icon");
 

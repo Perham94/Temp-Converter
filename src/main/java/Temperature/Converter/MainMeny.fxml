@@ -6,16 +6,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane id="splitPane" orientation="VERTICAL" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane id="splitPane" orientation="VERTICAL" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
       <Pane prefHeight="200.0" prefWidth="600.0">
          <children>
-            <Text fontSmoothingType="LCD" layoutX="156.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SolKlart Väder">
+            <Text fontSmoothingType="LCD" layoutX="41.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SolKlart Väder" wrappingWidth="279.0">
                <font>
                   <Font size="37.0" />
                </font>
             </Text>
-            <ComboBox id="comboBox" layoutX="156.0" layoutY="109.0" prefHeight="28.0" prefWidth="231.0" promptText="Plats" />
+            <ComboBox id="comboBox" layoutX="41.0" layoutY="97.0" prefHeight="28.0" prefWidth="268.0" promptText="Plats" />
+            <Text id="averagetemp" layoutX="373.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MedelTemp">
+               <font>
+                  <Font size="20.0" />
+               </font></Text>
+            <Text id="median" layoutX="373.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median">
+               <font>
+                  <Font size="20.0" />
+               </font></Text>
          </children>
       </Pane>
   </items>

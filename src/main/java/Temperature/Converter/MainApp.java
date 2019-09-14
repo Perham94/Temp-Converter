@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -35,7 +36,6 @@ public class MainApp extends Application {
 			Temperature temp = arrayTemps.get(0);
 			TemperatureView tpv = new TemperatureView(temp);
 			Parent root2 = tpv.getTempView();
-
 			p.getItems().addAll(root2.lookup("#tempView"));
 
 			primaryStage.setTitle("SolKlart Väder");
@@ -43,39 +43,42 @@ public class MainApp extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
+			/*
+			 * Average Temp and Median
+			 */
+			Text averageTempText = (Text) root.lookup("#averagetemp");
+			Text medianText = (Text) root.lookup("#median");
+			AverageTemp avgTemp = new AverageTemp(Converter.convertFahrenheitToCelsius(arrayTemps));
+			MedianTemp medianTemp = new MedianTemp(Converter.convertFahrenheitToCelsius(arrayTemps));
+			averageTempText.setText("Medeltemperatur: " + avgTemp.Calculate());
+			medianText.setText("Mediantemperatur: " + medianTemp.getMedian() + "C");
+
+			/*
+			 * Populate the ComboBox and add event to change location and scene
+			 */
 			@SuppressWarnings("unchecked")
 			ComboBox<String> comboBox = (ComboBox<String>) root.lookup("#comboBox");
 			for (Temperature temperature : arrayTemps) {
-
 				comboBox.getItems().add(temperature.getLocation());
 			}
-
 			EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
-					System.out.println(comboBox.getValue());
-
 					for (Temperature temperature : arrayTemps) {
 						if (temperature.getLocation().contentEquals(comboBox.getValue())) {
 							TemperatureView t = new TemperatureView(temperature);
 							try {
 								Parent root3 = t.getTempView();
 								p.getItems().set(1, root3.lookup("#tempView"));
-
 								primaryStage.setScene(scene);
-
 								primaryStage.show();
-								System.out.println("hete");
 							} catch (IOException e1) {
-
 								e1.printStackTrace();
 							}
-
 							break;
 						}
 					}
 				}
 			};
-
 			comboBox.setOnAction(event);
 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

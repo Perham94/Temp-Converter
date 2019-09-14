@@ -35,7 +35,9 @@ public class Converter {
 			// sending it to the converter.
 			if (temperature.getTempUnit().contentEquals("C")) {
 				Double d = callSoapWebService(soapEndpointUrl, soapAction, temperature);
-				fahrenheitList.add(new Temperature("F", d));
+
+				double roundedTwoDigitX = Math.round(d * 100) / 100.0;
+				fahrenheitList.add(new Temperature("F", roundedTwoDigitX));
 			} else {
 				fahrenheitList.add(temperature);
 			}
@@ -56,7 +58,8 @@ public class Converter {
 		for (Temperature temperature : tpList) {
 			if (temperature.getTempUnit().contentEquals("F")) {
 				Double d = callSoapWebService(soapEndpointUrl, soapAction, temperature);
-				celsiusList.add(new Temperature("C", d));
+				double roundedTwoDigitX = Math.round(d * 100) / 100.0;
+				celsiusList.add(new Temperature("C", roundedTwoDigitX));
 			} else {
 				celsiusList.add(temperature);
 			}
