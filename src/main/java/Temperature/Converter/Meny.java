@@ -124,7 +124,7 @@ public class Meny {
 				if (tempSeries != null && tempSeries.size() != 0) {
 					MedianTemp averageTempObj = new MedianTemp(Converter.convertCelsiusToFahrenheit(tempSeries));
 					System.out.println("\nMediantemperatur i Fahrenheit:");
-					System.out.println(averageTempObj.Calculate());
+					System.out.println(averageTempObj.getMedian());
 				} else {
 					System.err.println(ERROR_NO_DATA);
 				}
@@ -132,8 +132,8 @@ public class Meny {
 			case 9:
 				if (tempSeries != null && tempSeries.size() != 0) {
 					MedianTemp averageTempObj = new MedianTemp(Converter.convertFahrenheitToCelsius(tempSeries));
-					System.out.println("\nMedeltemperatur i Celsius:");
-					System.out.println(averageTempObj.Calculate());
+					System.out.println("\nMediantemperatur i Celsius:");
+					System.out.println(averageTempObj.getMedian());
 				} else {
 					System.err.println(ERROR_NO_DATA);
 				}
@@ -155,7 +155,7 @@ public class Meny {
 	 * @param series
 	 */
 	private static void showSeries(ArrayList<Temperature> series) {
-		for (Temperature obj : series) {
+		for (TemperatureInterface obj : series) {
 			String temperature = (numberFormat.format(obj.getTemp()));
 			System.out.println(temperature + " °" + obj.getTempUnit().toUpperCase());
 		}

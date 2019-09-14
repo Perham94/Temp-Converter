@@ -32,14 +32,11 @@ public class AverageTemp {
 	 * Creates the String that is going to be sent to the Math API to be calculated.
 	 */
 	private void getValues() {
-		for (int i = 0; i < TempList.size(); i++) {
-			if (i == TempList.size() - 1) {
-				path += "" + TempList.get(i).getTemp() + "";
-				break;
-			}
-			path += TempList.get(i).getTemp() + "%2B";
+		String expr = "";
+		for (Temperature temperature : TempList) {
+			expr += String.valueOf(temperature.getTemp()) + "%2B";
 		}
-		path = "(" + path + ")" + "%2F" + "(" + TempList.size() + ")";
+		path = "(" + expr + "0)" + "%2F" + "(" + TempList.size() + ")";
 	}
 
 	/**

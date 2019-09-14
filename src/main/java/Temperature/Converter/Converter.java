@@ -35,7 +35,9 @@ public class Converter {
 			// sending it to the converter.
 			if (temperature.getTempUnit().contentEquals("C")) {
 				Double d = callSoapWebService(soapEndpointUrl, soapAction, temperature);
-				fahrenheitList.add(new Temperature("F", d));
+
+				double roundedTwoDigitX = Math.round(d * 100) / 100.0;
+				fahrenheitList.add(new Temperature("F", roundedTwoDigitX));
 			} else {
 				fahrenheitList.add(temperature);
 			}
@@ -56,7 +58,8 @@ public class Converter {
 		for (Temperature temperature : tpList) {
 			if (temperature.getTempUnit().contentEquals("F")) {
 				Double d = callSoapWebService(soapEndpointUrl, soapAction, temperature);
-				celsiusList.add(new Temperature("C", d));
+				double roundedTwoDigitX = Math.round(d * 100) / 100.0;
+				celsiusList.add(new Temperature("C", roundedTwoDigitX));
 			} else {
 				celsiusList.add(temperature);
 			}
@@ -70,7 +73,7 @@ public class Converter {
 	 * @param temperature     The Temperature to convert
 	 * @return Double the temperature that has been converted
 	 */
-	private static Double callSoapWebService(String soapEndpointUrl, String soapAction, Temperature temperature) {
+	private static Double callSoapWebService(String soapEndpointUrl, String soapAction, TemperatureInterface temperature) {
 		Double convertedTemp = 0d;
 		try {
 			// Create SOAP Connection
@@ -101,7 +104,7 @@ public class Converter {
 	 * @return SOAPMessage
 	 * @throws Exception
 	 */
-	private static SOAPMessage createSOAPRequest(String soapAction, Temperature temperature) throws Exception {
+	private static SOAPMessage createSOAPRequest(String soapAction, TemperatureInterface temperature) throws Exception {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
 
@@ -121,7 +124,7 @@ public class Converter {
 	 * @param temperature
 	 * @throws SOAPException
 	 */
-	private static void createSoapMessage(SOAPMessage soapMessage, Temperature temperature) throws SOAPException {
+	private static void createSoapMessage(SOAPMessage soapMessage, TemperatureInterface temperature) throws SOAPException {
 		SOAPPart soapPart = soapMessage.getSOAPPart();
 		String myNamespace = "temperature";
 		String myNamespaceURI = "https://www.w3schools.com/xml/";
