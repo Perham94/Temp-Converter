@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,10 +30,9 @@ public class MainApp extends Application {
 			Scene scene = new Scene(root);
 			SplitPane p = (SplitPane) root.lookup("#splitPane");
 
-			ArrayList<Temperature> arrayTemps = new ArrayList<Temperature>();
-			arrayTemps = RemoteSource.getRemoteTemperatures();
+			final ArrayList<Temperature> arrayTemps = RemoteSource.getRemoteTemperatures();
 
-			Temperature temp = arrayTemps.get(1);
+			Temperature temp = arrayTemps.get(0);
 			TemperatureView tpv = new TemperatureView(temp);
 			Parent root2 = tpv.getTempView();
 
@@ -42,13 +42,42 @@ public class MainApp extends Application {
 			scene.getStylesheets().add("/resource/CSS/MainMeny.css");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-			
+
 			@SuppressWarnings("unchecked")
-			ComboBox<String> c = (ComboBox<String>) root.lookup("#comboBox");
-			c.getItems().addAll("Stockholm", "New York");
-			
-			
+			ComboBox<String> comboBox = (ComboBox<String>) root.lookup("#comboBox");
+			for (Temperature temperature : arrayTemps) {
+
+				comboBox.getItems().add(temperature.getLocation());
+			}
+
+			EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent e) {
+					System.out.println(comboBox.getValue());
+
+					for (Temperature temperature : arrayTemps) {
+						if (temperature.getLocation().contentEquals(comboBox.getValue())) {
+							TemperatureView t = new TemperatureView(temperature);
+							try {
+								Parent root3 = t.getTempView();
+								p.getItems().set(1, root3.lookup("#tempView"));
+
+								primaryStage.setScene(scene);
+
+								primaryStage.show();
+								System.out.println("hete");
+							} catch (IOException e1) {
+
+								e1.printStackTrace();
+							}
+
+							break;
+						}
+					}
+				}
+			};
+
+			comboBox.setOnAction(event);
+
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent e) {
