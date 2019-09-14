@@ -37,6 +37,17 @@ public class RemoteSource {
 				+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]";
 		array.add(connectToAdress(adress2, "C"));
 
+		
+		// Shanghai
+		String adress3 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/31.225731, 121.467777,"
+				+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]";
+		array.add(connectToAdress(adress3, "C"));
+	
+		// Los angeles
+		String adress4 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/34.031152, -118.270027,"
+				+ time.intValue() + "?units=us&exclude=[minutely,hourly,daily]";
+		array.add(connectToAdress(adress4, "F"));
+		
 		return array;
 
 	}
