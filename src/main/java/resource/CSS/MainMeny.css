@@ -4,5 +4,5 @@
 }
 
 .split-pane *.split-pane-divider {
-	-fx-padding: 0 1 0 1;
+	-fx-padding: 0 0 0 0;
 }

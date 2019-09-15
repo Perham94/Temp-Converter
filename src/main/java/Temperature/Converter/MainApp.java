@@ -69,8 +69,6 @@ public class MainApp extends Application {
 							try {
 								Parent root3 = t.getTempView();
 								p.getItems().set(1, root3.lookup("#tempView"));
-								primaryStage.setScene(scene);
-								primaryStage.show();
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}
