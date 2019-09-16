@@ -1,0 +1,75 @@
+.chart {
+	-fx-text-p: white;
+	-fx-font-size: 20pt;	
+	}
+.chart-title {
+	-fx-text-fill: white;
+}
+
+.chart-legend {
+	-fx-padding: 20px;
+}
+
+
+.chart-content {
+	-fx-padding: 20px;
+}
+
+.chart-plot-background {
+	-fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+	-fx-stroke: transparent;
+}
+
+
+
+.chart-horizontal-zero-line {
+	-fx-stroke:white;
+}	
+
+
+.chart-legend-item-symbol{
+	-fx-background-color:orange;
+	-fx-stroke:orange;
+}
+
+.axis{
+	-fx-tick-label-fill:white;
+}
+
+.axis-label{
+	-fx-text-fill: white;
+
+}
+.default-color2.chart-series-line { -fx-stroke: transparent; }
+.default-color1.chart-series-line { -fx-stroke: limegreen; }
+.default-color0.chart-series-line { -fx-stroke: yellow; }
+
+
+.default-color2.chart-line-symbol {
+    -fx-background-color: yellow, yellow; 
+}
+.default-color1.chart-line-symbol { 
+    -fx-background-color: transparent, transparent; 
+}
+.default-color0.chart-line-symbol { 
+    -fx-background-color: red, transparent;
+    -fx-shape: "M 20.0 20.0  v24.0 h 20.0  v-24   Z";
+    -fx-padding: 10px 10px 10px 10px;
+}
+
+.default-color0.chart-symbol {
+    -fx-background-radius: 30px;
+}
+
+.default-color2.chart-legend-item-symbol{
+    -fx-background-color: yellow;
+ }
+.default-color1.chart-legend-item-symbol{
+    -fx-background-color: limegreen;
+ }
+.default-color0.chart-legend-item-symbol{
+    -fx-background-color: red;
+ }
