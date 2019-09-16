@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class MedianTemp {
 	private ArrayList<Temperature> TempList;
-	private int result;
+	private String result;
+	private double value;
 
 	/**
 	 * @param tempList
@@ -14,15 +15,27 @@ public class MedianTemp {
 
 	public MedianTemp(ArrayList<Temperature> tempList) {
 
-		TempList = new ArrayList<Temperature>(tempList);
-
+		TempList = tempList;
+		sortList();
 	}
 
-	public String Calculate() {
+	public String getMedian() {
 
-		result = TempList.size() / 2;
+		if (TempList.size() % 2 == 0) {
+			value = TempList.get(TempList.size() / 2).getTemp() + TempList.get((TempList.size() / 2) + 1).getTemp();
 
-		return TempList.get(Math.round(result)).getTemp() + TempList.get(Math.round(result)).getTempUnit();
+			result = value + "";
+
+		} else {
+
+			result = TempList.get(TempList.size() / 2).getTemp() + "";
+		}
+
+		return result;
 	}
 
+	private void sortList() {
+
+		TempList.sort((Temperature c1, Temperature c2) -> Double.compare(c1.getTemp(), c2.getTemp()));
+	}
 }
