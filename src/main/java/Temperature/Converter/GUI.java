@@ -37,7 +37,7 @@ import javafx.scene.image.ImageView;
 public class GUI{
 	
 	private static final String ERROR_NO_DATA = "INGA MÄTVÄRDEN HITTADES!";
-	private static final String STYLE_SHEET = "/stylesheet.css";
+	private static final String STYLE_SHEET = "/resource/CSS/stylesheet.css";
 	private static ArrayList<Temperature> tempSeries;
 	private static ArrayList<Temperature> tempSeriesCelsius;
 	private static ArrayList<Temperature> tempSeriesFahrenheit;
@@ -102,7 +102,7 @@ public class GUI{
         try {
             String current = new java.io.File( "." ).getCanonicalPath();
             System.out.println("Current dir:"+ current);
-            image = new Image(new FileInputStream("src/resource/sky.jpeg"));           
+            image = new Image(new FileInputStream("src/main/java/resource/sky.jpeg"));           
         } catch(Exception E) {
         	System.out.println("Error");
             E.printStackTrace(); 

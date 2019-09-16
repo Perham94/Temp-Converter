@@ -1,5 +1,6 @@
 package Temperature.Converter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class MainApp extends Application {
 
 			primaryStage.setTitle("SolKlart Väder");
 			scene.getStylesheets().add("/resource/CSS/MainMeny.css");
-			
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
@@ -74,7 +75,7 @@ public class MainApp extends Application {
 							try {
 								Parent root3 = t.getTempView();
 								p.getItems().set(1, root3.lookup("#tempView"));
-								
+
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}
@@ -94,7 +95,7 @@ public class MainApp extends Application {
 				}
 			};
 			exit.setOnAction(eventExit);
-			
+
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent e) {
@@ -102,6 +103,22 @@ public class MainApp extends Application {
 					System.exit(0);
 				}
 			});
+
+			Button graf = (Button) root.lookup("#graf");
+			EventHandler<ActionEvent> eventShowGraf = new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent e) {
+					GUI g = new GUI();
+					Stage stage;
+					try {
+						stage = g.start();
+						stage.show();
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
+				}
+			};
+			graf.setOnAction(eventShowGraf);
+
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
