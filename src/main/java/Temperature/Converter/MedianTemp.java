@@ -22,13 +22,13 @@ public class MedianTemp {
 	public String getMedian() {
 
 		if (TempList.size() % 2 == 0) {
-			value = TempList.get(TempList.size() / 2).getTemp() + TempList.get((TempList.size() / 2) + 1).getTemp();
-
-			result = value + "";
+			value = (TempList.get(TempList.size() / 2).getTemp() + TempList.get((TempList.size() / 2) - 1).getTemp())
+					/ 2;
+			double roundedOneDigitX = Math.round(value * 10) / 10.0;
+			result = roundedOneDigitX + "";
 
 		} else {
-
-			result = TempList.get(TempList.size() / 2).getTemp() + "";
+			result = (Math.round(TempList.get(TempList.size() / 2).getTemp() * 10) / 10.0) + "";
 		}
 
 		return result;
