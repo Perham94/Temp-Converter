@@ -1,8 +1,26 @@
+
 #splitPane {
-	-fx-background-color: lightblue;
-	
+ -fx-background-color:rgb(51,102,153);
+  
+    	
+  
+    -fx-background-radius: 9,8,5,4,3;
+
+	 -fx-font-family: "Helvetica";
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+
 }
+
 
 .split-pane *.split-pane-divider {
 	-fx-padding: 0 0 0 0;
+}
+
+#end{
+		-fx-background-color: red;
+	
+}
+.root {
+    -fx-text-fill: green ;
 }

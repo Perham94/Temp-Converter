@@ -55,7 +55,7 @@ public class AverageTemp {
 			scanner.useDelimiter("\\A");
 			loop = scanner.hasNext() ? scanner.next() : "";
 			scanner.close();
-			result = Math.round(Float.parseFloat(loop)) + TempList.get(0).getTempUnit() + "";
+			result = (Math.round(Double.parseDouble(loop) * 10) / 10.0) + TempList.get(0).getTempUnit() + "";
 
 		} catch (ProtocolException e) {
 			e.printStackTrace();

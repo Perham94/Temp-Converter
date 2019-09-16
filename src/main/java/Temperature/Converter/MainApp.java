@@ -10,10 +10,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class MainApp extends Application {
@@ -30,7 +33,8 @@ public class MainApp extends Application {
 
 			Scene scene = new Scene(root);
 			SplitPane p = (SplitPane) root.lookup("#splitPane");
-
+			scene.setFill(Color.TRANSPARENT);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			final ArrayList<Temperature> arrayTemps = RemoteSource.getRemoteTemperatures();
 
 			Temperature temp = arrayTemps.get(0);
@@ -40,6 +44,7 @@ public class MainApp extends Application {
 
 			primaryStage.setTitle("SolKlart Väder");
 			scene.getStylesheets().add("/resource/CSS/MainMeny.css");
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
@@ -69,6 +74,7 @@ public class MainApp extends Application {
 							try {
 								Parent root3 = t.getTempView();
 								p.getItems().set(1, root3.lookup("#tempView"));
+								
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}
@@ -79,6 +85,16 @@ public class MainApp extends Application {
 			};
 			comboBox.setOnAction(event);
 
+			Button exit = (Button) root.lookup("#end");
+
+			EventHandler<ActionEvent> eventExit = new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent e) {
+					Platform.exit();
+					System.exit(0);
+				}
+			};
+			exit.setOnAction(eventExit);
+			
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent e) {

@@ -84,7 +84,7 @@ public class TemperatureView {
 		}
 
 		File file = new File(url.getPath());
-
+	
 		icon.getEngine().loadContent("<img src=\"" + file.toURI() + "\">");
 		icon.getEngine().setUserStyleSheetLocation(getClass().getResource("/resource/CSS/WebView.css").toString());
 		icon.getEngine().getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
