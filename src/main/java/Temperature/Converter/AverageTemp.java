@@ -62,9 +62,30 @@ public class AverageTemp {
 		} catch (UnknownHostException e) {
 			System.out.println(e.toString());
 		}
-
 		return result;
 
+	}
+	
+	public double CalculateDouble() throws IOException {
+		
+		double resultDouble = 0;
+		getValues();
+		link = new URL("https://api.mathjs.org/v4/?expr=" + path);
+
+		try {
+			Scanner scanner = new Scanner(link.openStream(), StandardCharsets.UTF_8.toString());
+
+			scanner.useDelimiter("\\A");
+			loop = scanner.hasNext() ? scanner.next() : "";
+			scanner.close();
+			resultDouble = (Math.round(Double.parseDouble(loop) * 10) / 10.0);
+
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			System.out.println(e.toString());
+		}
+		return resultDouble;
 	}
 
 }

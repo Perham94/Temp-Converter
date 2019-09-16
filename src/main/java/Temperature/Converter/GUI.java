@@ -1,6 +1,7 @@
 package Temperature.Converter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -185,7 +186,9 @@ public class GUI{
      		    series.getData().add(new XYChart.Data(temp_num, tempObject.getTemp()));
         	}       	
         	
+        	//double averageTemp = calculateAverage(sortedSeries);
         	double averageTemp = calculateAverage(sortedSeries);
+
  		    averageTempLine.getData().add(new XYChart.Data(0, averageTemp));
  		    averageTempLine.getData().add(new XYChart.Data(tempSeries.size(), averageTemp));
  		    
@@ -261,17 +264,17 @@ public class GUI{
         return primaryStage;
 	}
 	
-	private Double calculateAverage(ArrayList<Temperature> tempSeries) {
-	      int sum = 0;
-	      for (int i=0; i< tempSeries.size(); i++) {
-	    	  Double temp = tempSeries.get(i).getTemp();
-	    	  System.out.println("inside calculateAVerage. temp: " + temp);
-	            sum += temp;
-	      }
-	      Double sumDouble = Double.valueOf(sum);
-	      Double a = sumDouble / tempSeries.size();
-	      System.out.println(sumDouble + " / " + tempSeries.size() + " = " + a);
-	      return a;
+	private double calculateAverage(ArrayList<Temperature> tempSeries) {
+		
+		AverageTemp avTempClass = new AverageTemp(tempSeries);
+		double avTemp = 0.0;
+		try {
+			avTemp = avTempClass.CalculateDouble();
+			System.out.println("avTemp: " + avTemp);		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return avTemp;    
 	}
 	
 	private double getMedianMarkXPos(ArrayList<Temperature> tempSeries) {
