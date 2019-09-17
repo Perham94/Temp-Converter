@@ -91,7 +91,7 @@ public class RemoteSource {
 			Temperature temp = new Temperature();
 			temp.setLocation(js.getString("timezone"));
 			JSONObject jsCurrently = js.getJSONObject("currently");
-			temp.setTempUnit(unit);
+			temp.setTempUnit(unit.trim());
 
 			double roundedTwoDigitX = Math.round(jsCurrently.getDouble("temperature") * 10) / 10.0;
 			temp.setTemp(roundedTwoDigitX);
