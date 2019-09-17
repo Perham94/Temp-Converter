@@ -67,6 +67,8 @@ public class MainApp extends Application {
 			for (Temperature temperature : arrayTemps) {
 				comboBox.getItems().add(temperature.getLocation());
 			}
+	
+			comboBox.getSelectionModel().select(0);
 			EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
 					for (Temperature temperature : arrayTemps) {

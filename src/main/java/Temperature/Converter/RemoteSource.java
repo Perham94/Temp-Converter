@@ -28,26 +28,38 @@ public class RemoteSource {
 		ArrayList<Temperature> array = new ArrayList<Temperature>();
 
 		Double time = Double.parseDouble(String.valueOf(System.currentTimeMillis())) / 1000d;
+		
 		// New York Manhattan
-		String adress1 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/40.795943,-73.959821,"
-				+ time.intValue() + "?units=us&exclude=[minutely,hourly,daily]";
-		array.add(connectToAdress(adress1, "F"));
+		array.add(connectToAdress(
+				"https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/40.795943,-73.959821,"
+						+ time.intValue() + "?units=us&exclude=[minutely,hourly,daily]",
+				"F"));
 		// Stockholm
-		String adress2 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/59.332848, 18.011651,"
-				+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]";
-		array.add(connectToAdress(adress2, "C"));
-
-		
+		array.add(connectToAdress(
+				"https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/59.332848, 18.011651,"
+						+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]",
+				"C"));
 		// Shanghai
-		String adress3 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/31.225731, 121.467777,"
-				+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]";
-		array.add(connectToAdress(adress3, "C"));
-	
+		array.add(connectToAdress(
+				"https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/31.225731, 121.467777,"
+						+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]",
+				"C"));
 		// Los angeles
-		String adress4 = "https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/34.031152, -118.270027,"
-				+ time.intValue() + "?units=us&exclude=[minutely,hourly,daily]";
-		array.add(connectToAdress(adress4, "F"));
-		
+		array.add(connectToAdress(
+				"https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/34.031152, -118.270027,"
+						+ time.intValue() + "?units=us&exclude=[minutely,hourly,daily]",
+				"F"));
+		// Tokyo
+		array.add(connectToAdress(
+				"https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/35.684164, 139.274418,"
+						+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]",
+				"C"));
+
+		// Danmark
+		array.add(connectToAdress(
+				"https://api.darksky.net/forecast/684f8208ee34774d4bf2a0cdcc360072/57.039751, 9.916065,"
+						+ time.intValue() + "?units=si&exclude=[minutely,hourly,daily]",
+				"C"));
 		return array;
 
 	}

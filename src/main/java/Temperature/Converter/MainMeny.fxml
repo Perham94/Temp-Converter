@@ -16,7 +16,7 @@
                   <Font size="37.0" />
                </font>
             </Text>
-            <ComboBox id="comboBox" layoutX="41.0" layoutY="97.0" prefHeight="28.0" prefWidth="268.0" promptText="Plats" />
+            <ComboBox id="comboBox" layoutX="41.0" layoutY="97.0" prefHeight="28.0" prefWidth="268.0" />
             <Text id="averagetemp" layoutX="373.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MedelTemp">
                <font>
                   <Font size="20.0" />

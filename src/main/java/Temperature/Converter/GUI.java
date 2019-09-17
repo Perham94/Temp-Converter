@@ -2,38 +2,25 @@ package Temperature.Converter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
-//import com.sun.javafx.geom.Rectangle;
-import javafx.scene.shape.Rectangle;
-
-import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView; 
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage; 
 
 public class GUI{
 	
@@ -42,23 +29,16 @@ public class GUI{
 	private static ArrayList<Temperature> tempSeries;
 	private static ArrayList<Temperature> tempSeriesCelsius;
 	private static ArrayList<Temperature> tempSeriesFahrenheit;
-	private static DecimalFormat numberFormat = new DecimalFormat("#.00"); // Antal decimaler
 	NumberAxis xAxis = new NumberAxis(0, 10, 1);
 	NumberAxis yAxis = new NumberAxis();
 	LineChart<Number, Number> sc = new LineChart<Number, Number>(xAxis, yAxis);
     private Scene scene;
 
-    ObservableList sPaneList01, sPaneList02;
+    ObservableList<Node> sPaneList01, sPaneList02;
     
     StackPane stackPane01, stackPane02;
 	
-	
-	//public static void main(String[] args) {
-	//	launch(args);
-	//}
-	
-	
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Stage start() throws FileNotFoundException {
 		
 		
@@ -181,7 +161,7 @@ public class GUI{
         	int temp_num = 0;
         	for(Temperature tempObject: sortedSeries) {
         		temp_num ++;
-        		Double temp = tempObject.getTemp();
+        		tempObject.getTemp();
         		System.out.println("mätning nr "+ temp_num + ": Mätvärde: " + tempObject.getTemp());
      		    series.getData().add(new XYChart.Data(temp_num, tempObject.getTemp()));
         	}       	
@@ -215,8 +195,8 @@ public class GUI{
  		    NumberAxis yAxis = new NumberAxis();
  		    sc = new LineChart<Number, Number>(xAxis, yAxis);
  		    xAxis.setLabel("Mätning");
-   		    yAxis.setLabel("Temperatur");
-   		    sc.setTitle("Temperaturmätningar i Celsius");
+   		    yAxis.setLabel("Temperatur i Fahrenheit");
+   		    sc.setTitle("Temperaturmätningar i Fahrenheit");
 	   		sc.setPrefSize(900, 700);
 	        sc.setMinSize(900, 700);
 	        sc.setMaxSize(900, 700);
@@ -235,7 +215,7 @@ public class GUI{
         	int temp_num = 0;
         	for(Temperature tempObject: sortedSeries) {
         		temp_num ++;
-        		Double temp = tempObject.getTemp();
+        		tempObject.getTemp();
         		System.out.println("mätning nr "+ temp_num + ": Mätvärde: " + tempObject.getTemp());
      		    series.getData().add(new XYChart.Data(temp_num, tempObject.getTemp()));
         	}       	
